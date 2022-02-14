@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "server": "nodemon ./bin/www",
-    "serverstart": "DEBUG=members-only:* npm run server"
+    "serverstart": "DEBUG=members-only:* NODE_ENV=development:* npm run server"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

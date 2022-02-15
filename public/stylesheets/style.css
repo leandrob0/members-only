@@ -1,8 +1,35 @@
+html,
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
 }
 
 a {
-  color: #00B7FF;
+  color: white;
+  text-decoration: none;
+}
+
+
+/*
+
+  STYLING NAVBAR
+
+*/
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #333;
+}
+
+.flex-item {
+  padding: 15px;
+}
+
+.flex-item a {
+  padding: 15px;
 }

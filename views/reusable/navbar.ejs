@@ -1,0 +1,14 @@
+<nav>
+  <div class="flex-item">
+    <a href="/">logo</a>
+  </div>
+  <div class="flex-item">
+    <% if(!user) { %> 
+        <a href="/log-in">Log in</a>
+        <a href="/sign-up">Sign up</a>
+    <% } else { %>
+        <a href="/">hello</a>
+        <a href="/logout">Log out</a>
+    <% } %>  
+  </div>
+</nav>

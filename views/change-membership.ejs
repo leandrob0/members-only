@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./reusable/head.ejs") %> 
+  <body>
+    <%- include("./reusable/navbar.ejs")%>
+    <div>
+        <% if(user.member === false) { %> 
+        <h2> Are you sure you want to become a member? </h2>
+        <form action="/member" method="POST">
+            <button>Be a member!</button>
+        </form>
+        <% } else { %> 
+        <h2> Are you sure you want to remove your membership? </h2>
+        <form action="/member" method="POST">
+            <button>Remove membership</button>
+        </form>
+        <% } %> 
+    </div>
+  </body>
+</html>

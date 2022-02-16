@@ -2,7 +2,6 @@ const User = require("../models/user");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
-const async = require("async");
 
 exports.get_homepage = (req, res, next) => {
   res.render("index", {
@@ -14,7 +13,7 @@ exports.get_sign_up = (req, res, next) => {
   res.render("sign-up-form", { user: undefined, errors: undefined });
 };
 
-exports.post_sign_up = [
+exports.post_sign_up = [ 
   // Sanitize and validate data.
   body("name_first", "A name longer than 3 characters is required")
     .trim()
@@ -47,6 +46,7 @@ exports.post_sign_up = [
       username: req.body.username,
       password: pw,
       member: false,
+      admin: false,
     });
 
     // Make the validation errors an array.
@@ -72,10 +72,11 @@ exports.get_log_in = (req, res, next) => {
   });
 };
 
+// TODO
+// I should sanitize the data before trying the log and show the errors.
 exports.post_log_in = passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/log-in",
-  failureFlash: true,
 });
 
 exports.log_out = (req, res, next) => {

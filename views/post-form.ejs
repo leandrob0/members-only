@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./reusable/head.ejs") %>
+  <body>
+    <%- include("./reusable/navbar.ejs")%>
+    <h1>Create new post!</h1>
+    <form action="/create" method="POST">
+      <label for="title">Title</label>
+      <input name="title" id="title" type="text" value="<% (post) ? post.title : null %>" />
+      <label for="text">Text</label>
+      <input name="text" id="text" type="text" value="<% (post) ? post.text : null %>"/>
+      <button>Create</button>
+    </form>
+  </body>
+</html>

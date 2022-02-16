@@ -7,7 +7,10 @@
         <a href="/log-in">Log in</a>
         <a href="/sign-up">Sign up</a>
     <% } else { %>
-        <a href="/">hello</a>
+        <% if(user.member) { %> 
+          <a href="/create">Create post</a>
+        <% } %>
+        <a href="/member">Update membership</a>
         <a href="/logout">Log out</a>
     <% } %>  
   </div>

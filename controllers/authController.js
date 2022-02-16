@@ -1,19 +1,26 @@
 const User = require("../models/user");
+const Post = require("../models/post");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 exports.get_homepage = (req, res, next) => {
-  res.render("index", {
-    user: res.locals.currentUser ? res.locals.currentUser : undefined,
-  });
+  Post.find()
+    .populate("author")
+    .exec((err, posts) => {
+      if (err) return next(err);
+      res.render("index", {
+        user: res.locals.currentUser ? res.locals.currentUser : undefined,
+        posts: posts,
+      });
+    });
 };
 
 exports.get_sign_up = (req, res, next) => {
   res.render("sign-up-form", { user: undefined, errors: undefined });
 };
 
-exports.post_sign_up = [ 
+exports.post_sign_up = [
   // Sanitize and validate data.
   body("name_first", "A name longer than 3 characters is required")
     .trim()

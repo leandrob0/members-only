@@ -70,7 +70,7 @@ exports.post_member = (req, res, next) => {
 
 exports.get_post_create = [
   (req,res, next) => {
-    if(req.isAuthenticated()) {
+    if(req.isAuthenticated() && res.locals.currentUser.member) {
       next();
     } else {
       res.redirect("/");

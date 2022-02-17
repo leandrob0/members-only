@@ -2,12 +2,20 @@ const User = require("../models/user");
 const Post = require("../models/post");
 const { body, validationResult } = require("express-validator");
 
-exports.get_member = (req, res, next) => {
+exports.get_member = [
+  (req,res, next) => {
+    if(req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/");
+    }
+  },
+  (req, res) => {
   res.render("change-membership", {
     user: res.locals.currentUser,
     errors: undefined,
   });
-};
+}];
 
 exports.post_member = (req, res, next) => {
   if (req.body.remove_member !== undefined && !res.locals.currentUser.admin) {
@@ -60,13 +68,22 @@ exports.post_member = (req, res, next) => {
   }
 };
 
-exports.get_post_create = (req, res, next) => {
+exports.get_post_create = [
+  (req,res, next) => {
+    if(req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/");
+    }
+  },
+  (req, res) => {
   res.render("post-form", {
     user: res.locals.currentUser,
     post: undefined,
     errors: undefined,
   });
-};
+}
+]
 
 exports.post_post_create = [
   // Sanitize and validate data.
@@ -104,12 +121,21 @@ exports.post_post_create = [
   },
 ];
 
-exports.get_admin = (req, res, next) => {
+exports.get_admin = [
+  (req,res, next) => {
+    if(req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/");
+    }
+  },
+  (req, res) => {
   res.render("become-admin", {
     user: res.locals.currentUser,
     errors: undefined,
   });
-};
+}
+]
 
 exports.post_admin = [
   body("admin_password", "The password is not correct")

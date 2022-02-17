@@ -16,9 +16,18 @@ exports.get_homepage = (req, res, next) => {
     });
 };
 
-exports.get_sign_up = (req, res, next) => {
-  res.render("sign-up-form", { user: undefined, errors: undefined });
-};
+exports.get_sign_up = [
+  (req,res, next) => {
+    if(req.isAuthenticated()) {
+      res.redirect("/");
+    } else {
+      next();
+    }
+  },
+  (req, res) => {
+    res.render("sign-up-form", { user: undefined, errors: undefined });
+  }
+]
 
 exports.post_sign_up = [
   // Sanitize and validate data.
@@ -73,11 +82,20 @@ exports.post_sign_up = [
   },
 ];
 
-exports.get_log_in = (req, res, next) => {
-  res.render("log-in-form", {
-    user: res.locals.currentUser ? res.locals.currentUser : undefined,
-  });
-};
+exports.get_log_in = [
+  (req,res, next) => {
+    if(req.isAuthenticated()) {
+      res.redirect("/");
+    } else {
+      next();
+    }
+  },
+  (req, res) => {
+    res.render("log-in-form", {
+      user: res.locals.currentUser ? res.locals.currentUser : undefined,
+    });
+  }
+]
 
 // TODO
 // I should sanitize the data before trying the log and show the errors.

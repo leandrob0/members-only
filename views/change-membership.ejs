@@ -5,20 +5,20 @@
     <%- include("./reusable/navbar.ejs")%>
     <div class="posts-container">
         <% if(user.member === false) { %> 
-        <div class="membership-change">
-          <h2> To become a member enter the password: getmembership</h2>
-          <form action="/member" method="POST">
-              <input id="member_password" name="member_password" type="password">
-              <button>Be a member!</button>
-          </form>
-        </div>
-        <% if(errors !== undefined) { %> 
-          <ul>
-          <% errors.forEach(err => { %>
-            <li><%=  err.msg %> </li>
-          <% }) %> 
-          </ul>
-        <% } %> 
+          <div class="membership-change">
+            <h2> To become a member enter the password: getmembership</h2>
+            <form action="/member" method="POST">
+                <input id="member_password" name="member_password" type="password">
+                <button>Be a member!</button>
+            </form>
+          </div>
+          <% if(errors !== undefined) { %> 
+            <ul>
+            <% errors.forEach(err => { %>
+              <li><%=  err.msg %> </li>
+            <% }) %> 
+            </ul>
+          <% } %> 
         <% } else { %> 
           <div class="membership-change">
             <h2> Are you sure you want to remove your membership? </h2>
@@ -28,6 +28,13 @@
                 <button>Confirm</button>
             </form>
           </div>
+          <% if(errors !== undefined) { %> 
+            <ul>
+            <% errors.forEach(err => { %>
+              <li><%=  err.msg %> </li>
+            <% }) %> 
+            </ul>
+          <% } %> 
         <% } %> 
     </div>
   </body>

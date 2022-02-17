@@ -49,10 +49,13 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 50px;
 
   height: 100%;
 
   background-color: #738FA7;
+
+  overflow: auto;
 }
 
 .post-container {
@@ -65,6 +68,10 @@ nav {
 
 .post-container:first-of-type {
   margin-top: 100px;
+}
+
+.post-container:last-of-type {
+  margin-bottom: 50px;
 }
 
 .header-post {
@@ -108,10 +115,12 @@ nav {
   margin-top: 100px;
 }
 
-.membership-change button {
+button {
   padding: 15px;
   margin: 5px;
+
   border: none;
+
   background-color: #0C4160;
   color:#D4F1F4;
 
@@ -123,8 +132,80 @@ nav {
   margin: 5px;
 }
 
-.membership-change button:hover {
+button:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
 
+/*
+
+  POST CREATE STYLING
+
+*/
+
+.post-create {
+  margin-top: 100px;
+  border-radius: 10px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #071330;
+  background-color: #C3CEDA;
+}
+
+.form-post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-post input{
+  padding: 10px;
+  margin: 5px;
+}
+
+.form-post label{
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.form-post textarea{
+  padding: 10px;
+  margin: 5px;
+  resize: none;
+}
+
+fieldset {
+  border: none;
+  padding: 10px;
+}
+
+#style-fieldset{
+  border-top: 1px solid #071330;
+}
+
+.delete-container {
+  display: flex;
+  justify-content: center;
+
+  background-color: rgb(255, 122, 122);
+
+  border: 1px solid #071330;
+  border-radius: 10px;
+  border-top-left-radius: 0; border-top-right-radius: 0;
+}
+
+.delete-container button {
+  background-color: rgb(92, 5, 5);
+  color: white;
+  font-weight: bold;
+}
+
+@media (max-width: 500px) {
+  nav {
+    flex-direction: column;
+  }
+}

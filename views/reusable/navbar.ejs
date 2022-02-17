@@ -1,6 +1,6 @@
 <nav>
   <div class="flex-item">
-    <a href="/">logo</a>
+    <a href="/">Home</a>
   </div>
   <div class="flex-item">
     <% if(!user) { %> 
@@ -10,8 +10,11 @@
         <% if(user.member) { %> 
           <a href="/create">Create post</a>
         <% } %>
-        <a href="/member">Update membership</a>
-        <a href="/logout">Log out</a>
+        <% if(!user.admin) { %> 
+          <a href="/member">Membership</a>
+          <a href="/admin">Admin</a>
+        <% } %>
+        <a href="/logout">Logout</a>
     <% } %>  
   </div>
 </nav>

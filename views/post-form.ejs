@@ -4,14 +4,23 @@
   <body>
     <%- include("./reusable/navbar.ejs")%>
     <div class="posts-container">
-      <h1>Create new post!</h1>
-      <form action="/create" method="POST">
-        <label for="title">Title</label>
-        <input name="title" id="title" type="text" value="<% (post) ? post.title : null %>" />
-        <label for="text">Text</label>
-        <input name="text" id="text" type="text" value="<% (post) ? post.text : null %>"/>
-        <button>Create</button>
-      </form>
+      <div class="post-create">
+        <h1>Create new post!</h1>
+        <form action="/create" method="POST" class="form-post">
+          <label for="title">Title</label>
+          <input name="title" id="title" type="text" value="<% (post) ? post.title : null %>" />
+          <label for="text">Text</label>
+          <textarea name="text" id="text" rows="5" cols="30" value="<% (post) ? post.text : null %>"></textarea>
+          <button>Create</button>
+        </form>
+      </div>
     </div>
+    <% if(errors !== undefined) { %> 
+      <ul>
+      <% errors.forEach(err => { %>
+        <li><%=  err.msg %> </li>
+      <% }) %> 
+      </ul>
+    <% } %> 
   </body>
 </html>

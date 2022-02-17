@@ -4,14 +4,16 @@
   <body>
     <%- include("./reusable/navbar.ejs")%>
     <div class="posts-container">
-      <h1>Log in!</h1>
-      <form action="/log-in" method="POST">
-        <label for="username">Username</label>
-        <input name="username" placeholder="username" type="text" />
-        <label for="password">Password</label>
-        <input name="password" type="password" autocomplete="current-password" />
-        <button>Log In</button>
-      </form>
+      <div class="post-create">
+        <h1>Log in!</h1>
+        <form action="/log-in" method="POST" class="form-post">
+          <label for="username">Username</label>
+          <input name="username" id="username" placeholder="username" type="text" />
+          <label for="password">Password</label>
+          <input name="password" id="password" type="password" autocomplete="current-password" />
+          <button>Log In</button>
+        </form>
+      </div>
     </div>
   </body>
 </html>

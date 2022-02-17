@@ -22,12 +22,24 @@
           <article class="post-container">
             <div class="header-post">
               <h2><%= post.title %> </h2>
-              <p><%= post.text %> </p>
+              <% if(post.text.length > 100) { %> 
+                <p><%= post.text.substring(0,100) %>...</p>
+              <% } else {%> 
+                <p><%= post.text %> </p>
+              <% } %> 
             </div>
             <div class="footer-post">
               <p><em>Posted: </em><%= post.format_time %> </p>
               <p><em>By: </em><%= post.author.fullname %> </p>
             </div>
+            <% if(user.admin) { %> 
+              <div class="delete-container">
+                <form method="POST" action="/delete">
+                  <input name="postid" id="postid" type="hidden" value=<%= post._id %> >
+                  <button>Delete post</button>
+                </form>
+              </div>
+            <% } %>
           </article>
         <% }) %> 
       <% } else { %> 

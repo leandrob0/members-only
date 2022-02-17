@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./reusable/head.ejs") %> 
+  <body>
+    <%- include("./reusable/navbar.ejs")%>
+    <div class="posts-container">
+        <div class="membership-change">
+          <h2> To become an admin enter the password: </h2>
+          <p> If you become an admin, you will be given the status of member also.</p>
+          <form action="/admin" method="POST">
+              <input id="admin_password" name="admin_password" type="password">
+              <button>Be an admin</button>
+          </form>
+        </div>
+        <% if(errors !== undefined) { %> 
+          <ul>
+          <% errors.forEach(err => { %>
+            <li><%=  err.msg %> </li>
+          <% }) %> 
+          </ul>
+        <% } %> 
+    </div>
+  </body>
+</html>

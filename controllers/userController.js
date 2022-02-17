@@ -10,8 +10,7 @@ exports.get_member = (req, res, next) => {
 };
 
 exports.post_member = (req, res, next) => {
-
-  if (req.body.remove_member !== undefined) {
+  if (req.body.remove_member !== undefined && !res.locals.currentUser.admin) {
     const user = new User({
       ...res.locals.currentUser,
       member: !res.locals.currentUser.member,
@@ -28,7 +27,10 @@ exports.post_member = (req, res, next) => {
       }
     );
   } else {
-    if (req.body.member_password === "getmembership" && typeof req.body.member_password === 'string') {
+    if (
+      req.body.member_password === "getmembership" &&
+      typeof req.body.member_password === "string"
+    ) {
       const user = new User({
         ...res.locals.currentUser,
         member: !res.locals.currentUser.member,
@@ -45,9 +47,14 @@ exports.post_member = (req, res, next) => {
         }
       );
     } else {
+      let errors = [];
+      if (res.locals.currentUser.admin)
+        errors.push({ msg: "An admin cannot remove his membership." });
+      else errors.push({ msg: "The password is not correct." });
+
       res.render("change-membership", {
         user: res.locals.currentUser,
-        errors: [{ msg: "The password is not correct." }],
+        errors: errors,
       });
     }
   }
@@ -96,3 +103,48 @@ exports.post_post_create = [
     }
   },
 ];
+
+exports.get_admin = (req, res, next) => {
+  res.render("become-admin", {
+    user: res.locals.currentUser,
+    errors: undefined,
+  });
+};
+
+exports.post_admin = [
+  body("admin_password", "The password is not correct")
+    .trim()
+    .escape()
+    .equals(process.env.ADMIN_PW),
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    const user = new User({
+      ...res.locals.currentUser,
+      member: res.locals.currentUser.member
+        ? res.locals.currentUser.member
+        : false,
+      admin: !res.locals.currentUser.admin,
+      _id: res.locals.currentUser._id,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("become-admin", {
+        user: res.locals.currentUser,
+        errors: errors.array(),
+      });
+    } else {
+      User.findByIdAndUpdate(res.locals.currentUser._id, user, {}, (err) => {
+        if (err) return next(err);
+        res.redirect("/");
+      });
+    }
+  },
+];
+
+exports.delete_post = (req, res, next) => {
+  Post.findByIdAndRemove(req.body.postid, function deletePost(err) {
+    if (err) return next(err);
+    res.redirect("/");
+  });
+};

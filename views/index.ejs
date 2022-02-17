@@ -4,7 +4,7 @@
   <body>
     <%- include("./reusable/navbar.ejs")%>
     <section class="posts-container">
-      <% if(user === undefined || !user.member) { %>
+      <% if(user === undefined) { %>
         <% posts.forEach(post => { %>
           <article class="post-container">
             <div class="header-post">
@@ -12,8 +12,8 @@
               <p> Log in and become a member to see the posts! </p>
             </div>
             <div class="footer-post">
-              <p>Private</p>
-              <p>Anonymous</p>
+              <p><em>Posted: </em>Private</p>
+              <p><em>By: </em>Anonymous</p>
             </div>
           </article>
         <% }) %> 
@@ -25,12 +25,25 @@
               <p><%= post.text %> </p>
             </div>
             <div class="footer-post">
-              <p><%= post.format_time %> </p>
-              <p><%= post.author.fullname %> </p>
+              <p><em>Posted: </em><%= post.format_time %> </p>
+              <p><em>By: </em><%= post.author.fullname %> </p>
             </div>
           </article>
         <% }) %> 
-      <% } %> 
+      <% } else { %> 
+        <% posts.forEach(post => { %>
+          <article class="post-container">
+            <div class="header-post">
+              <h2> Private content</h2>
+              <p> Log in and become a member to see the posts! </p>
+            </div>
+            <div class="footer-post">
+              <p><em>Posted: </em><%= post.format_time %> </p>
+              <p><em>By: </em><%= post.author.fullname %> </p>
+            </div>
+          </article>
+        <% }) %> 
+      <% } %>
     </section>
   </body>
 </html>

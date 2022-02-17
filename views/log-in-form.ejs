@@ -3,13 +3,15 @@
   <%- include("./reusable/head.ejs") %>
   <body>
     <%- include("./reusable/navbar.ejs")%>
-    <h1>Log in!</h1>
-    <form action="/log-in" method="POST">
-      <label for="username">Username</label>
-      <input name="username" placeholder="username" type="text" />
-      <label for="password">Password</label>
-      <input name="password" type="password" autocomplete="current-password" />
-      <button>Log In</button>
-    </form>
+    <div class="posts-container">
+      <h1>Log in!</h1>
+      <form action="/log-in" method="POST">
+        <label for="username">Username</label>
+        <input name="username" placeholder="username" type="text" />
+        <label for="password">Password</label>
+        <input name="password" type="password" autocomplete="current-password" />
+        <button>Log In</button>
+      </form>
+    </div>
   </body>
 </html>

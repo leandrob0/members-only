@@ -24,7 +24,10 @@ nav {
   justify-content: space-between;
   align-items: center;
 
-  background-color: #333;
+  position: fixed;
+  top: 0; right: 0; left: 0;
+
+  background-color: #0C4160;
 }
 
 .flex-item {
@@ -33,6 +36,7 @@ nav {
 
 .flex-item a {
   padding: 15px;
+  color: #D4F1F4;
 }
 
 /*
@@ -46,12 +50,21 @@ nav {
   flex-direction: column;
   align-items: center;
 
-  margin-top: 50px;
+  height: 100%;
+
+  background-color: #738FA7;
 }
 
 .post-container {
-  width: 45%;
-  border: 1px solid black;
+  width: 50%;
+
+  color: #071330;
+  background-color: #C3CEDA;
+  border-radius: 10px;
+}
+
+.post-container:first-of-type {
+  margin-top: 100px;
 }
 
 .header-post {
@@ -63,11 +76,55 @@ nav {
 }
 
 .footer-post {
-  border-top: 1px  solid #333;
+  border-top: 1px  solid black;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 
   padding: 10px;
 }
+
+/*
+
+  CHANGE MEMBERSHIP PAGE STYLING.
+
+*/
+
+.membership-change {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #071330;
+  background-color: #C3CEDA;
+  border-radius: 10px;
+
+  padding: 10px;
+}
+
+.membership-change:first-of-type {
+  margin-top: 100px;
+}
+
+.membership-change button {
+  padding: 15px;
+  margin: 5px;
+  border: none;
+  background-color: #0C4160;
+  color:#D4F1F4;
+
+  transition: 0.1s ease-in-out;
+}
+
+.membership-change input {
+  padding: 10px;
+  margin: 5px;
+}
+
+.membership-change button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+

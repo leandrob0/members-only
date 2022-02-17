@@ -3,17 +3,31 @@
   <%- include("./reusable/head.ejs") %> 
   <body>
     <%- include("./reusable/navbar.ejs")%>
-    <div>
+    <div class="posts-container">
         <% if(user.member === false) { %> 
-        <h2> Are you sure you want to become a member? </h2>
-        <form action="/member" method="POST">
-            <button>Be a member!</button>
-        </form>
+        <div class="membership-change">
+          <h2> To become a member enter the password: getmembership</h2>
+          <form action="/member" method="POST">
+              <input id="member_password" name="member_password" type="password">
+              <button>Be a member!</button>
+          </form>
+        </div>
+        <% if(errors !== undefined) { %> 
+          <ul>
+          <% errors.forEach(err => { %>
+            <li><%=  err.msg %> </li>
+          <% }) %> 
+          </ul>
+        <% } %> 
         <% } else { %> 
-        <h2> Are you sure you want to remove your membership? </h2>
-        <form action="/member" method="POST">
-            <button>Remove membership</button>
-        </form>
+          <div class="membership-change">
+            <h2> Are you sure you want to remove your membership? </h2>
+            <h3> Confirm your membership removal: </h3>
+            <form action="/member" method="POST">
+                <input id="remove_member" name="remove_member" type="hidden" value="remove">
+                <button>Confirm</button>
+            </form>
+          </div>
         <% } %> 
     </div>
   </body>

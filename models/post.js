@@ -15,7 +15,7 @@ PostSchema.virtual("url").get(function () {
 });
 
 PostSchema.virtual("format_time").get(function () {
-  return this.timestamp.toLocaleDateString(undefined,{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  return this.timestamp.toLocaleDateString(undefined,{ year: 'numeric', month: 'long', day: 'numeric' });
 })
 
 module.exports = mongoose.model("Post", PostSchema);

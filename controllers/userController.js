@@ -3,20 +3,54 @@ const Post = require("../models/post");
 const { body, validationResult } = require("express-validator");
 
 exports.get_member = (req, res, next) => {
-  res.render("change-membership", { user: res.locals.currentUser });
+  res.render("change-membership", {
+    user: res.locals.currentUser,
+    errors: undefined,
+  });
 };
 
 exports.post_member = (req, res, next) => {
-  const user = new User({
-    ...res.locals.currentUser,
-    member: !res.locals.currentUser.member,
-    _id: res.locals.currentUser._id,
-  });
 
-  User.findByIdAndUpdate(res.locals.currentUser._id, user, {}, (err, user) => {
-    if (err) return next(err);
-    res.redirect("/");
-  });
+  if (req.body.remove_member !== undefined) {
+    const user = new User({
+      ...res.locals.currentUser,
+      member: !res.locals.currentUser.member,
+      _id: res.locals.currentUser._id,
+    });
+
+    User.findByIdAndUpdate(
+      res.locals.currentUser._id,
+      user,
+      {},
+      (err, user) => {
+        if (err) return next(err);
+        res.redirect("/");
+      }
+    );
+  } else {
+    if (req.body.member_password === "getmembership" && typeof req.body.member_password === 'string') {
+      const user = new User({
+        ...res.locals.currentUser,
+        member: !res.locals.currentUser.member,
+        _id: res.locals.currentUser._id,
+      });
+
+      User.findByIdAndUpdate(
+        res.locals.currentUser._id,
+        user,
+        {},
+        (err, user) => {
+          if (err) return next(err);
+          res.redirect("/");
+        }
+      );
+    } else {
+      res.render("change-membership", {
+        user: res.locals.currentUser,
+        errors: [{ msg: "The password is not correct." }],
+      });
+    }
+  }
 };
 
 exports.get_post_create = (req, res, next) => {

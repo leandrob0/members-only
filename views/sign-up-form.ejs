@@ -3,39 +3,41 @@
   <%- include("./reusable/head.ejs") %>
   <body>
     <%- include("./reusable/navbar.ejs")%>
-    <h1>Sign up!</h1>
-    <form action="/sign-up" method="POST">
-      <fieldset>
-        <label for="name_first">First name</label>
-        <input
-          name="name_first"
-          id="name_first"
-          type="text"
-        />
-        <label for="name_last">Last name</label>
-        <input
-          name="name_last"
-          id="name_last"
-          type="text"
-        />
-      </fieldset>
-      <fieldset>
-        <label for="username">Username</label>
-        <input
-          name="username"
-          id="username"
-          placeholder="username"
-          type="text"
-        />
-        <label for="password">Password</label>
-        <input
-          name="password"
-          id="password"
-          type="password"
-          autocomplete="new-password"
-        />
-      </fieldset>
-      <button>Sign Up</button>
-    </form>
+    <div class="posts-container">
+      <h1>Sign up!</h1>
+      <form action="/sign-up" method="POST">
+        <fieldset>
+          <label for="name_first">First name</label>
+          <input
+            name="name_first"
+            id="name_first"
+            type="text"
+          />
+          <label for="name_last">Last name</label>
+          <input
+            name="name_last"
+            id="name_last"
+            type="text"
+          />
+        </fieldset>
+        <fieldset>
+          <label for="username">Username</label>
+          <input
+            name="username"
+            id="username"
+            placeholder="username"
+            type="text"
+          />
+          <label for="password">Password</label>
+          <input
+            name="password"
+            id="password"
+            type="password"
+            autocomplete="new-password"
+          />
+        </fieldset>
+        <button>Sign Up</button>
+      </form>
+    </div>
   </body>
 </html>
